@@ -1,0 +1,33 @@
+services:
+  frontend:
+    build: ./frontend/
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
+    environment:
+      -  BACKEND_URL=http://backend:8000
+
+
+  backend:
+    build: ./backend
+    ports:
+      - "8000:8000"
+    environment:
+      DATABASE_URL: postgresql+psycopg://app:app@postgres:5432/app
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: app
+      POSTGRES_PASSWORD: app
+      POSTGRES_DB: app
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+volumes:
+  pgdata:
