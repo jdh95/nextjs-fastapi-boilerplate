@@ -1,9 +1,10 @@
-// app/layout.tsx
 import type { Metadata } from "next";
 
+const appName = process.env.NEXT_PUBLIC_APP_NAME ?? "App";
+
 export const metadata: Metadata = {
-  title: "Finanzplaner",
-  description: "Finanzplaner Webapp",
+  title: appName,
+  description: `${appName} Webapp`,
 };
 
 export default function RootLayout({
