@@ -137,3 +137,27 @@ Write-Host ""
 Write-Host "Next steps / checks:" -ForegroundColor Cyan
 Write-Host "  http://localhost:3000/api/health"
 Write-Host "  Register/Login via http://localhost:3000/register"
+
+# -------------------------
+# Run migrations in backend container (alembic)
+# -------------------------
+Write-Host ""
+Write-Host "Running database migrations (alembic upgrade head)..." -ForegroundColor Cyan
+
+$maxAttempts = 10
+for ($i = 1; $i -le $maxAttempts; $i++) {
+  try {
+    docker compose exec backend python -m alembic upgrade head
+    Write-Host "Migrations applied successfully." -ForegroundColor Green
+    break
+  } catch {
+    if ($i -eq $maxAttempts) {
+      Write-Host "Failed to run migrations after $maxAttempts attempts." -ForegroundColor Red
+      Write-Host "Try manually:" -ForegroundColor Yellow
+      Write-Host "  docker compose exec backend python -m alembic upgrade head" -ForegroundColor Yellow
+      throw
+    }
+    Write-Host "Backend not ready yet (attempt $i/$maxAttempts). Waiting 2s..." -ForegroundColor Yellow
+    Start-Sleep -Seconds 2
+  }
+}
