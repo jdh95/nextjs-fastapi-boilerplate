@@ -180,7 +180,8 @@ Health (über Proxy): http://localhost:3000/api/health
 .
 ├── docker-compose.yml
 ├── scripts/
-│   └── init-project.ps1
+│   ├── init-project.ps1
+|   └── db-migrate.ps1
 ├── backend/
 │   ├── main.py
 │   ├── db.py
