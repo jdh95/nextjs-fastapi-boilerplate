@@ -178,19 +178,26 @@ Health (über Proxy): http://localhost:3000/api/health
 
 ```text
 .
-├── README.md
 ├── docker-compose.yml
+├── scripts/
+│   └── init-project.ps1
 ├── backend/
 │   ├── main.py
+│   ├── db.py
+│   ├── models.py
 │   ├── auth_jwt.py
 │   ├── auth_password.py
-│   ├── models.py
-│   ├── db.py
+│   ├── requirements.txt
 │   ├── alembic/
+│   │   ├── env.py
 │   │   └── versions/
 │   └── Dockerfile
 └── frontend/
     ├── app/
+    │   ├── layout.tsx
+    │   ├── page.tsx          # /app (geschützter Bereich)
+    │   ├── login/
+    │   ├── register/
+    │   └── api/[...path]/    # Proxy zum Backend
     ├── package.json
-    ├── package-lock.json
-    └── Dockerfile
+    ├── Dockerfile
