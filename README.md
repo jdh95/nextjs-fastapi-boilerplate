@@ -114,6 +114,38 @@ identities
 - Zugriff über SQLAlchemy
 - Migrationen mit Alembic
 
+#### DB Migration Script (db-migrate.ps1)
+
+Das Script wird verwendet, um Datenbankschema-Änderungen korrekt in Docker anzuwenden.
+
+Vorgehen
+
+Schema im Code ändern
+Änderungen immer in backend/models.py vornehmen.
+
+Migration ausführen
+
+Nur bestehende Migrationen anwenden:
+
+.\scripts\db-migrate.ps1
+
+
+Neue Migration erzeugen und direkt anwenden:
+
+.\scripts\db-migrate.ps1 "<message>"
+
+
+Ergebnis prüfen
+Tabellen können anschließend z. B. mit DBeaver oder per SQL geprüft werden (read-only).
+
+Was das Script macht
+
+baut den Backend-Container neu (aktueller Code ist im Container)
+
+erzeugt optional eine neue Alembic-Migration
+
+führt alembic upgrade head aus
+
 ### Kommunikation
 - Browser → Next.js (`localhost:3000`)
 - Next.js → FastAPI (über internes Docker-Netzwerk)
