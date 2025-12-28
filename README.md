@@ -220,6 +220,7 @@ Health (über Proxy): http://localhost:3000/api/health
 │   ├── models.py
 │   ├── auth_jwt.py
 │   ├── auth_password.py
+│   ├── auth_current_user.py
 │   ├── requirements.txt
 │   ├── alembic/
 │   │   ├── env.py
