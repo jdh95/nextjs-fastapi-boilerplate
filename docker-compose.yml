@@ -17,6 +17,11 @@ services:
       DATABASE_URL: postgresql+psycopg://app:app@postgres:5432/app
     depends_on:
       - postgres
+    volumes:
+      # 🔒 Gesamter Backend-Code read-only
+      - ./backend:/app:ro
+      # ✍️ Nur Migrationen dürfen geschrieben werden
+      - ./backend/alembic/versions:/app/alembic/versions
 
   postgres:
     image: postgres:16
